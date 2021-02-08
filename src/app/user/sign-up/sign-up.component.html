@@ -1,0 +1,83 @@
+<div class="bg">
+    <button class="btn btn-primary  m-2" routerLink="/login">Login</button>
+    <!-- [ngStyle]="{backgroundImage:'url(../../../assets/images/regs.jpg)'}"> -->
+    <div class="container">
+        <h2 class="text-center">SignIn Form</h2>
+
+        <div class="justify-content-md-center p-5 m-5">
+
+            <div class="row col-md-6 offset-4">
+                <form [formGroup]="regForm">
+                    <div class="form-group">
+                        <input type="text" required class="form-control" formControlName="fullName" name="fullName"
+                            [class.is-invalid]="regForm.get('fullName').invalid && regForm.get('fullName').touched"
+                            placeholder="Enter Name" />
+                        <div *ngIf="regForm.get('fullName').invalid && regForm.get('fullName').touched">
+                            <small class="text-danger" *ngIf="regForm.get('fullName').errors?.required">Name should not
+                                be empty</small>
+                            <small class="text-danger" *ngIf="regForm.get('fullName').errors?.minlength">Name should be
+                                atleast 6 charactors
+                                above</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="email" name="email"
+                            [class.is-invalid]="regForm?.get('email').invalid && regForm?.get('email').touched"
+                            placeholder="Enter Email" />
+                        <div class="row col-sm-12"
+                            *ngIf="regForm?.get('email').invalid &&regForm?.get('email').touched">
+                            <small class="text-danger" *ngIf="regForm?.get('email').errors?.required">plz Enter
+                                Email</small>
+                            <small class="text-danger" *ngIf="regForm?.get('email').errors?.pattern">Enter valid email
+                                formate
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" formControlName="contact" required class="form-control"
+                            [class.is.invalid]="regForm?.get('contact').invalid && regForm?.get('contact').touched"
+                            placeholder="Enter Contact" />
+                        <div class="row col-sm-12"
+                            *ngIf="regForm.get('contact').invalid && regForm.get('contact').touched">
+                            <small class="text-danger">contact is must required</small>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" required class="form-control" formControlName="password" name="password"
+                            [class.is-invalid]="regForm?.get('password').invalid && regForm?.get('password').touched"
+                            placeholder="Enter Password" />
+                        <div class="row col-sm-12"
+                            *ngIf="regForm?.get('password').invalid && regForm?.get('password').touched">
+                            <small class="text-danger" *ngIf="regForm?.get('password').errors?.required">Password
+                                Should not be empty</small>
+                            <small class="text-danger" *ngIf="regForm?.get('password').errors?.pattern">password
+                                must have 8 charectors or above and Capital small and include special symbles</small>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <input type='password' required
+                            [class.is-invalid]="regForm?.get('conformPassword').invalid && regForm?.get('conformPassword').touched"
+                            formControlName="conformPassword" class="form-control" placeholder="conformPassword" />
+                        <div class="row col-sm-12"
+                            *ngIf="regForm?.get('conformPassword').invalid && regForm?.get('conformPassword').touched">
+                            <small class="text-danger" *ngIf="regForm?.get('conformPassword').errors?.required">Confirm
+                                Password is required
+                            </small>
+                            <small class="text-danger"
+                                *ngIf="regForm?.get('conformPassword').errors?.mustMatch">Passwords must match</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" (click)="createUser()">CreateUser</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isError" class="alert alert-warning" role="alert">
+        Serverside Error
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<!-- <button class="btn btn-primary float-right m-2" routerLink="/signup">Register</button> -->
+<button class="btn btn-primary float-right m-2" routerLink="/register">Register</button>
+<div class="pt-5 row justify-content-center align-items-center login-card-bg">
+    <div class="card mt-4 p-3 shadow card-width">
+        <article class="card-body">
+            <div class="card-title  text-center mb-4 mt-1">
+                <img src="assets/images/login.jpg" width="100" height="100" />
+            </div>
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input class="form-control" [formControl]="loginForm?.get('email')" required
+                            [class.is-invalid]="loginForm?.get('email').invalid &&loginForm?.get('email').touched"
+                            placeholder="Email Id" type="email">
+                        <div class="row col-sm-12" *ngIf="loginForm?.get('email').invalid &&loginForm?.get('email').touched">
+                            <small class="text-danger" *ngIf="loginForm?.get('email').errors?.required">plz Enter
+                                Email</small>
+                            <small class="text-danger" *ngIf="loginForm?.get('email').errors?.pattern">Enter valid email
+                                formate
+                            </small>
+                        </div>
+                    </div>
+                    <!-- input-group.// -->
+                </div>
+                <!-- form-group// -->
+                <div class="form-group" *ngIf="isReset">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control" required [formControl]="loginForm?.get('password')"
+                            placeholder="Password"
+                            [class.is-invalid]="loginForm?.get('password').invalid && loginForm?.get('password').touched"
+                            type="password">
+                        <div class="row col-sm-12" *ngIf="loginForm?.get('password').invalid && loginForm?.get('password').touched">
+                            <small class="text-danger" *ngIf="loginForm?.get('password').errors?.required">Password
+                                Should not be empty</small>
+                            <small class="text-danger" *ngIf="loginForm?.get('password').errors?.minlength">password
+                                must have 6 charectors or above</small>
+                        </div>
+                    </div>
+                    <!-- input-group.// -->
+                </div>
+                <div class="form-group">
+                    <button type="submit" (click)="submitLoginForm();" class="btn btn-primary btn-block">
+                        Login
+                        <!-- <i *ngIf="showLoginSpinner" class="fa fa-spinner sort-icon fa-lg ml-2 pt-2"
+                            aria-hidden="true"></i> -->
+                    </button>
+                    <a href="" (click)="isReset=!isReset">forgot Password</a>
+                </div>
+            </form>
+        </article>
+    </div>
+</div>
